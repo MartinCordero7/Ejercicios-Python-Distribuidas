@@ -2,16 +2,13 @@ version: '3.8'
 
 services:
   secuencial:
-    build: .
+    build: ./1_secuencial
     container_name: python_secuencial
-    command: python 1_secuencial/main.py
 
   concurrente:
-    build: .
+    build: ./2_concurrente_sin_lock
     container_name: python_concurrente_sin_lock
-    command: python 2_concurrente_sin_lock/main.py
 
   con_lock:
-    build: .
+    build: ./3_concurrente_con_lock
     container_name: python_concurrente_con_lock
-    command: python 3_concurrente_con_lock/main.py

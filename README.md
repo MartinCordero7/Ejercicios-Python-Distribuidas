@@ -1,120 +1,85 @@
-# Paradigmas de Ejecución en Python: Secuencial, Concurrencia y Sincronización con Lock
+# Ejercicios de Programación Concurrente y Distribuida
 
-Este repositorio contiene tres implementaciones prácticas en Python aplicadas a situaciones de la vida cotidiana para comprender las diferencias clave entre:
-1. **Ejecución Secuencial**
-2. **Concurrencia sin Sincronización (Condición de Carrera / Race Condition)**
-3. **Concurrencia con Sincronización (Exclusión Mutua con Lock)**
+Este repositorio contiene tres actividades independientes que abordan diferentes paradigmas de ejecución mediante ejemplos prácticos de la vida cotidiana en Python y Dockerizados con **Docker Compose**.
 
-Todo el proyecto está dockerizado y listo para ser ejecutado fácilmente mediante **Docker Compose**.
+Cada actividad está organizada en su propia subcarpeta con su respectivo código fuente (`main.py`), contenedor (`Dockerfile`), configuración de orquestación (`docker-compose.yml`) y documentación detallada (`README.md`).
 
 ---
 
-## 📌 Enlace del Repositorio
+## 📌 Enlaces Directos a Cada Actividad
 
-- **URL Pública de GitHub:** [https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas.git](https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas.git)
+| Actividad | Paradigma | Caso de la Vida Real | Enlace a la Carpeta |
+| :--- | :--- | :--- | :--- |
+| **Actividad 1** | **Secuencial** | 🧺 Proceso de Lavandería (paso a paso estricto) | [📂 Ver Actividad 1](https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas/tree/main/1_secuencial) |
+| **Actividad 2** | **Concurrencia sin Lock** | 🎟️ Venta de Boletos de Concierto (Race Condition y sobreventa) | [📂 Ver Actividad 2](https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas/tree/main/2_concurrente_sin_lock) |
+| **Actividad 3** | **Concurrencia con Lock** | 🏧 Cajero Automático Bancario (Exclusión mutua y consistencia) | [📂 Ver Actividad 3](https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas/tree/main/3_concurrente_con_lock) |
 
 ---
 
-## 📂 Estructura del Proyecto
+## 📂 Estructura General del Repositorio
 
 ```text
-.
+Ejercicios-Python-Distribuidas/
 ├── 1_secuencial/
-│   └── main.py              # Proceso de Lavandería (Paso a paso en orden estricto)
+│   ├── main.py                  # Script Python: Lavandería
+│   ├── Dockerfile               # Contenedor independiente
+│   ├── docker-compose.yml       # Orquestación de la actividad 1
+│   └── README.md                # Documentación de la actividad 1
 ├── 2_concurrente_sin_lock/
-│   └── main.py              # Venta de Boletos de Concierto (Race Condition y sobreventa)
+│   ├── main.py                  # Script Python: Boletos de concierto
+│   ├── Dockerfile               # Contenedor independiente
+│   ├── docker-compose.yml       # Orquestación de la actividad 2
+│   └── README.md                # Documentación de la actividad 2
 ├── 3_concurrente_con_lock/
-│   └── main.py              # Cajero Automático Bancario (Exclusión mutua con Lock)
-├── Dockerfile               # Imagen base ligera en Python
-├── docker-compose.yml       # Orquestación de los 3 servicios
+│   ├── main.py                  # Script Python: Cajero automático
+│   ├── Dockerfile               # Contenedor independiente
+│   ├── docker-compose.yml       # Orquestación de la actividad 3
+│   └── README.md                # Documentación de la actividad 3
+├── docker-compose.yml           # Compose raíz para ejecutar cualquier actividad
 ├── .gitignore
-└── README.md
+└── README.md                    # Índice general del repositorio
 ```
 
 ---
 
-## 📖 Casos de la Vida Real Implementados
+## 🚀 Cómo Ejecutar Cada Actividad
 
-### 1. Ejecución Secuencial: *Proceso de Lavandería* 🧺
-- **Carpeta:** `1_secuencial/main.py`
-- **Analogía:** En una lavandería, el flujo de tareas es estrictamente dependiente:
-  1. Lavar la ropa.
-  2. Secar la ropa (no puedes secar antes de lavar).
-  3. Planchar la ropa (no puedes planchar ropa mojada).
-  4. Guardar en el armario.
-- **Concepto técnico:** Las instrucciones se ejecutan una después de la otra en un solo hilo. El tiempo total es la suma exacta de los tiempos de cada tarea ($T_{total} = \sum T_i$). Es predecible y seguro, pero no aprovecha el paralelismo.
+Puedes ejecutar cada actividad de dos formas: ingresando directamente a la subcarpeta de cada una o desde la raíz del proyecto.
 
----
+### Opción A: Ejecutar desde la subcarpeta de la actividad (Recomendado para entrega individual)
 
-### 2. Concurrencia sin Lock: *Venta de Boletos de Concierto (Sobreventa)* 🎟️
-- **Carpeta:** `2_concurrente_sin_lock/main.py`
-- **Analogía:** Una plataforma de conciertos tiene solo **3 boletos disponibles**. Al mismo tiempo, 5 clientes intentan comprar el último inventario.
-- **Concepto técnico:** Se lanzan múltiples hilos (`threading.Thread`) concurrentemente sin control de acceso al recurso compartido (`boletos_disponibles`).
-- **Problema:** Varios hilos consultan la disponibilidad antes de que los demás descuenten el inventario, generando una **condición de carrera (Race Condition)** y provocando una sobreventa (quedando un inventario inconsistente o negativo).
+1. **Actividad 1 (Secuencial):**
+   ```bash
+   cd 1_secuencial
+   docker compose up --build
+   ```
 
----
+2. **Actividad 2 (Concurrente sin Lock):**
+   ```bash
+   cd 2_concurrente_sin_lock
+   docker compose up --build
+   ```
 
-### 3. Concurrencia con Lock: *Retiro en Cajero Automático (Cuenta Compartida)* 🏧
-- **Carpeta:** `3_concurrente_con_lock/main.py`
-- **Analogía:** Dos personas (Juan y María) tienen una cuenta bancaria compartida con un saldo de **$100**. Ambos acuden a cajeros diferentes al mismo segundo e intentan retirar **$80** cada uno.
-- **Concepto técnico:** Se utiliza un cerrojo de exclusión mutua (`threading.Lock()`). Solo un hilo a la vez puede adquirir el `lock` para consultar y descontar el saldo.
-- **Solución:** La sección crítica se ejecuta de forma atómica. El primer hilo procesa el retiro con éxito dejando $20; el segundo hilo entra inmediatamente después, verifica que $20 < $80 y deniega la transacción por saldo insuficiente, protegiendo la integridad de la cuenta.
+3. **Actividad 3 (Concurrente con Lock):**
+   ```bash
+   cd 3_concurrente_con_lock
+   docker compose up --build
+   ```
 
 ---
 
-## 🚀 Requisitos Previos
+### Opción B: Ejecutar desde la raíz del proyecto
 
-Tener instalado en el sistema:
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
+Si te encuentras en la raíz del repositorio, puedes ejecutar cualquiera de las tres actividades directamente:
 
----
-
-## 🐳 Cómo Ejecutar con Docker Compose
-
-### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas.git
-cd Ejercicios-Python-Distribuidas
-```
-
-### 2. Construir la imagen Docker
-```bash
-docker compose build
-# (o docker-compose build)
-```
-
-### 3. Ejecutar los scripts individualmente
-
-Puedes ejecutar cada uno de los 3 casos usando el servicio correspondiente:
-
-#### A) Ejecutar el caso Secuencial:
-```bash
+# Ejecutar Actividad 1
 docker compose run --rm secuencial
-```
-*(o con sintaxis clásica: `docker-compose run --rm secuencial`)*
 
-#### B) Ejecutar el caso Concurrente sin Lock (Condición de carrera):
-```bash
+# Ejecutar Actividad 2
 docker compose run --rm concurrente
-```
-*(o con sintaxis clásica: `docker-compose run --rm concurrente`)*
 
-#### C) Ejecutar el caso Concurrente con Lock (Exclusión mutua):
-```bash
+# Ejecutar Actividad 3
 docker compose run --rm con_lock
 ```
-*(o con sintaxis clásica: `docker-compose run --rm con_lock`)*
-
----
-
-### 4. Ejecutar todos los servicios en secuencia
-Si deseas ver la ejecución de los tres casos juntos:
-```bash
-docker compose up
-```
-
-Para detener y limpiar los contenedores:
-```bash
-docker compose down
-```
+*(Nota: También puedes usar `docker-compose` con guion según la versión de Docker instalada).*
