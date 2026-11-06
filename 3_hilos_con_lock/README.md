@@ -1,7 +1,7 @@
 # Actividad 3: Concurrencia con Sincronización (Hilos con Lock)
 
 ## 📌 Enlace de la Carpeta en GitHub
-[Ver carpeta en el Repositorio](https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas/tree/main/3_concurrente_con_lock)
+[Ver carpeta en el Repositorio](https://github.com/MartinCordero7/Ejercicios-Python-Distribuidas/tree/main/3_hilos_con_lock)
 
 ---
 
@@ -16,11 +16,12 @@ Imaginemos una cuenta bancaria compartida entre dos personas (Juan y María) con
    - El cajero de Juan consulta el saldo ($100), descuenta $80 y entrega el dinero. El saldo actualizado pasa a ser $20.
    - Juan libera el `Lock`.
    - María adquiere el `Lock` inmediatamente después, consulta el saldo actual ($20) y el sistema rechaza la operación por **saldo insuficiente**.
-4. **Resultado:** Se respeta la integridad financiera de la cuenta bancaria.
+4. **Resultado:** Se respeta la integridad financiera de la cuenta bancaria gracias al `Lock`.
 
 ### 🧠 Concepto Técnico
+- **Hilos con Lock (`threading.Thread` + `threading.Lock`):** A diferencia de `asyncio` (que es concurrencia cooperativa en un solo hilo), aquí los hilos se ejecutan de manera preventiva a nivel del sistema operativo.
 - **Exclusión Mutua (`threading.Lock`):** Garantiza que solo un hilo a la vez pueda ejecutar la **sección crítica** (el bloque de código donde se lee y actualiza la variable compartida `saldo`).
-- **Context Manager (`with lock:`):** En Python, asegura que el cerrojo sea adquirido (`acquire`) al entrar y liberado (`release`) de forma segura al salir, incluso si ocurre una excepción.
+- **Context Manager (`with lock:`):** En Python, asegura que el cerrojo sea adquirido (`acquire`) al entrar y liberado (`release`) de forma segura al salir.
 
 ---
 
@@ -29,7 +30,7 @@ Imaginemos una cuenta bancaria compartida entre dos personas (Juan y María) con
 Asegúrate de estar ubicado dentro de esta carpeta:
 
 ```bash
-cd 3_concurrente_con_lock
+cd 3_hilos_con_lock
 ```
 
 ### 1. Construir y ejecutar el contenedor

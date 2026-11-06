@@ -3,5 +3,4 @@ version: '3.8'
 services:
   app:
     build: .
-    container_name: app_concurrente_con_lock
-
+    container_name: app_concurrente
