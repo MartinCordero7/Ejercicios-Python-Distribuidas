@@ -4,3 +4,4 @@ services:
   app:
     build: .
     container_name: app_concurrente_con_lock
+

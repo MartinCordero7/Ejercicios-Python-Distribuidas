@@ -7,7 +7,8 @@
 
 ## 📖 Descripción del Ejemplo de la Vida Real: *Cajero Automático Bancario* 🏧
 
-Imaginemos una cuenta bancaria compartida entre dos personas (Juan y María) con un saldo inicial de **$100**:
+Imaginemos una cuenta bancaria compartida entre dos personas (Juan y María) con un saldo inicial de **$100**, implementada en `cajero_banco_lock.py`:
+
 1. Ambos usuarios van a cajeros automáticos diferentes en la misma ciudad e intentan retirar **$80** exactamente al mismo segundo.
 2. Para evitar que ambos retiren dinero simultáneamente y dejen la cuenta en saldo negativo o con sobregiro, el sistema bancario implementa un **cerrojo de exclusión mutua (`Lock`)**.
 3. **Flujo de la transacción:**

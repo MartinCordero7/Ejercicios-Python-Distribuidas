@@ -7,11 +7,11 @@
 
 ## 📖 Descripción del Ejemplo de la Vida Real: *Venta de Boletos de Concierto* 🎟️
 
-Imaginemos una boletería virtual donde solo quedan **3 boletos disponibles** para un concierto muy esperado. En el mismo milisegundo, **5 personas** (Carlos, Sofía, Andrés, Valentina y Mateo) dan clic en "Comprar":
+Imaginemos una boletería virtual implementada en `boletos_concurrente.py` donde solo quedan **3 boletos disponibles** para un concierto muy esperado. En el mismo milisegundo, **5 personas** (Carlos, Sofía, Andrés, Valentina y Mateo) dan clic en "Comprar":
 
 1. Cada usuario consulta el sistema y lee que aún quedan 3 boletos (`boletos > 0`).
 2. Cada usuario es redirigido a la pasarela de pago (tarda una fracción de segundo).
-3. Como **no existe ningún bloqueo (Lock)** en la base de datos o memoria compartida, el sistema aprueba la compra de los 5 usuarios y descuenta el inventario de forma descontrolada.
+3. Como **no existe ningún bloqueo (Lock)** en la memoria o recurso compartido, el sistema aprueba la compra de los 5 usuarios y descuenta el inventario de forma descontrolada.
 4. **Resultado:** ¡Sobreventa (overbooking)! Se vendieron 5 boletos teniendo solo 3, y el stock final queda en valores negativos o inconsistentes.
 
 ### 🧠 Concepto Técnico

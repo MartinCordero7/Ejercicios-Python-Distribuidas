@@ -7,7 +7,8 @@
 
 ## 📖 Descripción del Ejemplo de la Vida Real: *Proceso de Lavandería* 🧺
 
-En la vida cotidiana, muchas tareas no se pueden realizar a la vez debido a dependencias estrictas. Un caso claro es el proceso de lavado de ropa:
+En la vida cotidiana, muchas tareas no se pueden realizar a la vez debido a dependencias estrictas. Un caso claro es el proceso de lavado de ropa implementado en `lavanderia_secuencial.py`:
+
 1. **Lavar la ropa:** La ropa sucia entra a la lavadora.
 2. **Secar la ropa:** No se puede meter la ropa a la secadora hasta que el ciclo de lavado termine.
 3. **Planchar la ropa:** No se puede planchar ropa húmeda; debe esperarse a que termine la secadora.

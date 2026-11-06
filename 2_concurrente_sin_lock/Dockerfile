@@ -4,6 +4,6 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY main.py .
+COPY boletos_concurrente.py .
 
-CMD ["python", "main.py"]
+CMD ["python", "boletos_concurrente.py"]

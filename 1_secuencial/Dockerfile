@@ -4,6 +4,6 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY main.py .
+COPY lavanderia_secuencial.py .
 
-CMD ["python", "main.py"]
+CMD ["python", "lavanderia_secuencial.py"]
